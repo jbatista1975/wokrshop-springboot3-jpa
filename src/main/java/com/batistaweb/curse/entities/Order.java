@@ -106,6 +106,15 @@ private Integer orderStatus;
 	public Set<OrderItem> getItems(){
 		return Items;
 	}
+	
+	public Double getTotal() {
+		double sum = 0.0;
+		for(OrderItem x : Items) {
+			sum += x.getSubTotal();	
+		}
+		return sum;
+	}
+	
 
 	@Override
 	public int hashCode() {

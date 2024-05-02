@@ -75,6 +75,11 @@ public class OrderItem implements Serializable{
 	public void setPrince(Double prince) {
 		this.prince = prince;
 	}
+	
+	public Double getSubTotal() {
+		return prince * quantity;
+	}
+	
 
 
 	@Override
