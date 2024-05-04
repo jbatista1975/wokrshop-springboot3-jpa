@@ -13,6 +13,8 @@ import com.batistaweb.curse.repositories.UserRepository;
 import com.batistaweb.curse.resources.exeception.DatabaseException;
 import com.batistaweb.curse.services.exception.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 	
@@ -45,9 +47,13 @@ public class UserService {
 	}
 	
 	public User update(Long id,User obj) {
+		try {
 		User entity = repository.getReferenceById(id);
 		updateData(entity,obj);
 		return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new   ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(User entity, User obj) {
